@@ -1,4 +1,3 @@
-
 import React, { useEffect } from 'react';
 import Navigation from '@/components/Navigation';
 import Hero from '@/components/Hero';
@@ -190,7 +189,13 @@ const Index = () => {
             </div>
             
             <div className="max-w-4xl mx-auto animate-on-scroll">
-              <Testimonials limit={1} showViewMore={true} />
+              <Testimonials />
+              
+              <div className="text-center mt-8">
+                <a href="/testimonials" className="spa-button">
+                  View More Testimonials
+                </a>
+              </div>
             </div>
           </div>
         </div>
