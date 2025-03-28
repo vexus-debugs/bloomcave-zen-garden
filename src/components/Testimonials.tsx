@@ -66,8 +66,7 @@ const Testimonials = () => {
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            entry.target.classList.add('animate-fade-in', 'opacity-100');
-            entry.target.classList.remove('opacity-0');
+            entry.target.classList.add('is-visible');
           }
         });
       },
@@ -111,14 +110,14 @@ const Testimonials = () => {
     <section 
       id="testimonials" 
       ref={testimonialsRef}
-      className="w-full py-20 relative overflow-hidden opacity-0 transition-all duration-1000"
+      className="w-full py-20 relative overflow-hidden animate-on-scroll opacity-100"
     >
       {/* Background decor */}
       <div className="absolute -top-24 -left-24 w-48 h-48 bg-spa-gold/10 rounded-full blur-3xl"></div>
       <div className="absolute -bottom-24 -right-24 w-48 h-48 bg-spa-lavender/20 rounded-full blur-3xl"></div>
       
       <div className="container mx-auto">
-        <div className="text-center mb-16 animate-on-scroll">
+        <div className="text-center mb-16 animate-on-scroll is-visible">
           <h2 className="text-3xl md:text-4xl font-playfair font-semibold mb-4">
             What Our <span className="text-spa-gold">Clients</span> Say
           </h2>
