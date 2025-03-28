@@ -2,11 +2,6 @@
 import React, { useEffect } from 'react';
 import Navigation from '@/components/Navigation';
 import Hero from '@/components/Hero';
-import Services from '@/components/Services';
-import About from '@/components/About';
-import Testimonials from '@/components/Testimonials';
-import Booking from '@/components/Booking';
-import Contact from '@/components/Contact';
 import Footer from '@/components/Footer';
 import ScrollToTop from '@/components/ScrollToTop';
 
@@ -41,11 +36,6 @@ const Index = () => {
     <div className="min-h-screen w-full overflow-x-hidden">
       <Navigation />
       <Hero />
-      <Services />
-      <About />
-      <Testimonials />
-      <Booking />
-      <Contact />
       <Footer />
       <ScrollToTop />
     </div>

@@ -1,11 +1,13 @@
 
 import React, { useState, useEffect } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import { cn } from '@/lib/utils';
 import { Menu, X } from 'lucide-react';
 
 const Navigation = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const location = useLocation();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -18,20 +20,12 @@ const Navigation = () => {
   }, []);
 
   const navLinks = [
-    { name: 'Home', href: '#home' },
-    { name: 'Services', href: '#services' },
-    { name: 'About', href: '#about' },
-    { name: 'Testimonials', href: '#testimonials' },
-    { name: 'Contact', href: '#contact' },
+    { name: 'Home', href: '/' },
+    { name: 'Services', href: '/services' },
+    { name: 'About', href: '/about' },
+    { name: 'Testimonials', href: '/testimonials' },
+    { name: 'Contact', href: '/contact' },
   ];
-
-  const scrollToSection = (sectionId: string) => {
-    const element = document.querySelector(sectionId);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    }
-    setIsMobileMenuOpen(false);
-  };
 
   return (
     <nav
@@ -43,45 +37,39 @@ const Navigation = () => {
       )}
     >
       <div className="container mx-auto flex justify-between items-center px-4 md:px-8">
-        <a href="#home" className="flex items-center">
+        <Link to="/" className="flex items-center">
           <h1 className="text-2xl font-playfair font-semibold text-spa-dark">
             <span className="text-spa-gold">Bloom</span>cave
           </h1>
-        </a>
+        </Link>
 
         {/* Desktop Menu */}
         <ul className="hidden md:flex space-x-8">
           {navLinks.map((link, index) => (
             <li key={index}>
-              <a
-                href={link.href}
-                onClick={(e) => {
-                  e.preventDefault();
-                  scrollToSection(link.href);
-                }}
+              <Link
+                to={link.href}
                 className={cn(
                   'text-sm font-medium transition-all duration-300 relative',
-                  isScrolled ? 'text-spa-dark hover:text-spa-gold' : 'text-white hover:text-spa-gold',
-                  'after:content-[""] after:absolute after:w-0 after:h-0.5 after:bg-spa-gold after:left-0 after:-bottom-1 after:transition-all after:duration-300 hover:after:w-full'
+                  isScrolled ? 'text-spa-dark hover:text-spa-gold' : 
+                              location.pathname === '/' ? 'text-white hover:text-spa-gold' : 'text-spa-dark hover:text-spa-gold',
+                  'after:content-[""] after:absolute after:w-0 after:h-0.5 after:bg-spa-gold after:left-0 after:-bottom-1 after:transition-all after:duration-300 hover:after:w-full',
+                  location.pathname === link.href && 'after:w-full text-spa-gold'
                 )}
               >
                 {link.name}
-              </a>
+              </Link>
             </li>
           ))}
         </ul>
 
         {/* Book Now Button - Desktop */}
-        <a
-          href="#booking"
-          onClick={(e) => {
-            e.preventDefault();
-            scrollToSection('#booking');
-          }}
+        <Link
+          to="/booking"
           className="hidden md:block spa-button"
         >
           Book Now
-        </a>
+        </Link>
 
         {/* Mobile Menu Button */}
         <button
@@ -103,29 +91,26 @@ const Navigation = () => {
         <ul className="flex flex-col items-center space-y-6 p-8">
           {navLinks.map((link, index) => (
             <li key={index} className="w-full">
-              <a
-                href={link.href}
-                onClick={(e) => {
-                  e.preventDefault();
-                  scrollToSection(link.href);
-                }}
-                className="text-xl font-medium text-spa-dark hover:text-spa-gold transition-colors duration-300 block text-center py-2"
+              <Link
+                to={link.href}
+                onClick={() => setIsMobileMenuOpen(false)}
+                className={cn(
+                  "text-xl font-medium text-spa-dark hover:text-spa-gold transition-colors duration-300 block text-center py-2",
+                  location.pathname === link.href && 'text-spa-gold'
+                )}
               >
                 {link.name}
-              </a>
+              </Link>
             </li>
           ))}
           <li className="w-full pt-4">
-            <a
-              href="#booking"
-              onClick={(e) => {
-                e.preventDefault();
-                scrollToSection('#booking');
-              }}
+            <Link
+              to="/booking"
+              onClick={() => setIsMobileMenuOpen(false)}
               className="spa-button w-full block text-center"
             >
               Book Now
-            </a>
+            </Link>
           </li>
         </ul>
       </div>
