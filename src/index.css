@@ -103,12 +103,14 @@
   
   .spa-button {
     @apply px-6 py-3 bg-spa-gold text-white rounded-md font-poppins font-medium 
-           hover:bg-opacity-90 transition-all duration-300 shadow-md hover:shadow-lg;
+           hover:bg-opacity-90 transition-all duration-300 shadow-md hover:shadow-lg 
+           hover:scale-[1.02] active:scale-[0.98];
   }
   
   .spa-card {
     @apply rounded-lg shadow-md hover:shadow-lg transition-all duration-300
-           bg-gradient-to-br from-white to-spa-beige/50 backdrop-blur-sm border border-spa-beige;
+           bg-gradient-to-br from-white to-spa-beige/50 backdrop-blur-sm border border-spa-beige 
+           hover:translate-y-[-5px];
   }
   
   .animate-on-scroll {
@@ -117,6 +119,58 @@
   
   .animate-on-scroll.is-visible {
     @apply opacity-100 translate-y-0;
+  }
+  
+  .animate-child {
+    @apply transition-all duration-500 ease-out;
+  }
+  
+  .animate-child.is-visible {
+    @apply opacity-100 translate-y-0;
+  }
+  
+  .animate-fade-in {
+    animation: fadeIn 0.8s ease-out forwards;
+  }
+  
+  .animate-slide-in {
+    animation: slideIn 0.8s ease-out forwards;
+  }
+  
+  .animate-scale-in {
+    animation: scaleIn 0.6s ease-out forwards;
+  }
+}
+
+/* Animation Keyframes */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
   }
 }
 
@@ -164,4 +218,61 @@
   50% {
     transform: translateY(-10px);
   }
+}
+
+/* Reveal on scroll animation */
+.reveal {
+  position: relative;
+  opacity: 0;
+  transition: all 1s ease;
+}
+
+.reveal.active {
+  opacity: 1;
+}
+
+.reveal.fade-bottom {
+  transform: translateY(50px);
+}
+
+.reveal.fade-bottom.active {
+  transform: translateY(0);
+}
+
+.reveal.fade-left {
+  transform: translateX(-100px);
+}
+
+.reveal.fade-right {
+  transform: translateX(100px);
+}
+
+.reveal.fade-left.active, 
+.reveal.fade-right.active {
+  transform: translateX(0);
+}
+
+/* Staggered animation delay helper classes */
+.delay-100 {
+  transition-delay: 100ms;
+}
+
+.delay-200 {
+  transition-delay: 200ms;
+}
+
+.delay-300 {
+  transition-delay: 300ms;
+}
+
+.delay-400 {
+  transition-delay: 400ms;
+}
+
+.delay-500 {
+  transition-delay: 500ms;
+}
+
+.delay-600 {
+  transition-delay: 600ms;
 }

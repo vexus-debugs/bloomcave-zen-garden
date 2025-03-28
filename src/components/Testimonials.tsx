@@ -1,5 +1,5 @@
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { ChevronLeft, ChevronRight, Star } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
@@ -50,6 +50,8 @@ const testimonials: Testimonial[] = [
 const Testimonials = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isAnimating, setIsAnimating] = useState(false);
+  const sliderRef = useRef<HTMLDivElement>(null);
+  const testimonialsRef = useRef<HTMLDivElement>(null);
   
   useEffect(() => {
     const interval = setInterval(() => {
@@ -58,6 +60,30 @@ const Testimonials = () => {
     
     return () => clearInterval(interval);
   }, [currentSlide]);
+  
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('animate-fade-in', 'opacity-100');
+            entry.target.classList.remove('opacity-0');
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+    
+    if (testimonialsRef.current) {
+      observer.observe(testimonialsRef.current);
+    }
+    
+    return () => {
+      if (testimonialsRef.current) {
+        observer.unobserve(testimonialsRef.current);
+      }
+    };
+  }, []);
   
   const nextSlide = () => {
     if (isAnimating) return;
@@ -84,7 +110,8 @@ const Testimonials = () => {
   return (
     <section 
       id="testimonials" 
-      className="section-padding bg-gradient-to-b from-spa-lavender/20 to-white relative overflow-hidden"
+      ref={testimonialsRef}
+      className="w-full py-20 relative overflow-hidden opacity-0 transition-all duration-1000"
     >
       {/* Background decor */}
       <div className="absolute -top-24 -left-24 w-48 h-48 bg-spa-gold/10 rounded-full blur-3xl"></div>
@@ -102,52 +129,58 @@ const Testimonials = () => {
           </p>
         </div>
         
-        <div className="relative max-w-4xl mx-auto px-4">
-          {/* Testimonial Slider */}
-          <div className="overflow-hidden relative bg-white rounded-xl shadow-lg p-8 md:p-12">
+        <div ref={sliderRef} className="w-full relative px-4">
+          {/* Testimonial Slider - Full Width */}
+          <div className="overflow-hidden relative w-full bg-gradient-to-r from-spa-beige/30 via-white to-spa-beige/30 py-12">
             <div 
-              className="transition-all duration-500 ease-in-out flex"
+              className="transition-all duration-500 ease-in-out flex w-full"
               style={{ transform: `translateX(-${currentSlide * 100}%)` }}
             >
               {testimonials.map((testimonial) => (
                 <div 
                   key={testimonial.id} 
-                  className="w-full flex-shrink-0 px-4"
+                  className="w-full flex-shrink-0 px-4 md:px-12"
                 >
-                  <div className="flex flex-col items-center text-center">
-                    <img 
-                      src={testimonial.avatar} 
-                      alt={testimonial.name}
-                      className="w-20 h-20 object-cover rounded-full border-2 border-spa-gold mb-6"
-                    />
-                    
-                    <div className="flex items-center mb-4">
-                      {[...Array(5)].map((_, i) => (
-                        <Star 
-                          key={i}
-                          size={18}
-                          className={i < testimonial.rating ? "text-spa-gold fill-spa-gold" : "text-gray-300"}
-                        />
-                      ))}
+                  <div className="flex flex-col md:flex-row items-center md:items-start max-w-4xl mx-auto">
+                    <div className="md:w-1/4 flex flex-col items-center md:mr-8 mb-6 md:mb-0">
+                      <img 
+                        src={testimonial.avatar} 
+                        alt={testimonial.name}
+                        className="w-20 h-20 object-cover rounded-full border-2 border-spa-gold mb-4 hover:scale-105 transition-transform duration-300"
+                      />
+                      
+                      <div className="flex items-center mb-2">
+                        {[...Array(5)].map((_, i) => (
+                          <Star 
+                            key={i}
+                            size={16}
+                            className={i < testimonial.rating ? "text-spa-gold fill-spa-gold" : "text-gray-300"}
+                          />
+                        ))}
+                      </div>
+                      
+                      <div className="text-center md:text-left">
+                        <h4 className="font-playfair font-semibold text-lg">{testimonial.name}</h4>
+                        <p className="text-spa-dark/60 text-sm">{testimonial.role}</p>
+                      </div>
                     </div>
                     
-                    <blockquote className="mb-6 text-spa-dark/80 italic">
-                      "{testimonial.comment}"
-                    </blockquote>
-                    
-                    <div>
-                      <h4 className="font-playfair font-semibold text-lg">{testimonial.name}</h4>
-                      <p className="text-spa-dark/60 text-sm">{testimonial.role}</p>
+                    <div className="md:w-3/4">
+                      <blockquote className="text-spa-dark/80 italic text-lg md:text-xl relative">
+                        <span className="absolute -top-6 -left-6 text-5xl text-spa-gold/20 font-serif">"</span>
+                        {testimonial.comment}
+                        <span className="absolute -bottom-10 -right-6 text-5xl text-spa-gold/20 font-serif">"</span>
+                      </blockquote>
                     </div>
                   </div>
                 </div>
               ))}
             </div>
             
-            {/* Navigation Arrows */}
+            {/* Navigation Arrows - Repositioned for full width */}
             <button 
               onClick={prevSlide}
-              className="absolute top-1/2 -translate-y-1/2 left-2 w-10 h-10 rounded-full bg-white/80 shadow-md flex items-center justify-center hover:bg-spa-gold hover:text-white transition-all duration-300"
+              className="absolute top-1/2 -translate-y-1/2 left-4 w-10 h-10 rounded-full bg-white/80 shadow-md flex items-center justify-center hover:bg-spa-gold hover:text-white transition-all duration-300 z-10"
               aria-label="Previous testimonial"
             >
               <ChevronLeft size={20} />
@@ -155,7 +188,7 @@ const Testimonials = () => {
             
             <button 
               onClick={nextSlide}
-              className="absolute top-1/2 -translate-y-1/2 right-2 w-10 h-10 rounded-full bg-white/80 shadow-md flex items-center justify-center hover:bg-spa-gold hover:text-white transition-all duration-300"
+              className="absolute top-1/2 -translate-y-1/2 right-4 w-10 h-10 rounded-full bg-white/80 shadow-md flex items-center justify-center hover:bg-spa-gold hover:text-white transition-all duration-300 z-10"
               aria-label="Next testimonial"
             >
               <ChevronRight size={20} />

@@ -1,4 +1,5 @@
-import React, { useEffect } from 'react';
+
+import React, { useEffect, useRef } from 'react';
 import Navigation from '@/components/Navigation';
 import Hero from '@/components/Hero';
 import Services from '@/components/Services';
@@ -8,24 +9,45 @@ import ScrollToTop from '@/components/ScrollToTop';
 import { ArrowDown } from 'lucide-react';
 
 const Index = () => {
+  // Refs for animation targets
+  const featuredRef = useRef<HTMLDivElement>(null);
+  const aboutRef = useRef<HTMLDivElement>(null);
+  const testimonialsRef = useRef<HTMLDivElement>(null);
+  
   useEffect(() => {
-    // Initialize scroll animations
+    // Initialize scroll animations with smoother transitions
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             entry.target.classList.add('is-visible');
+            
+            // Add staggered animations for child elements
+            const children = entry.target.querySelectorAll('.animate-child');
+            children.forEach((child, index) => {
+              setTimeout(() => {
+                (child as HTMLElement).classList.add('is-visible');
+              }, 100 * index);
+            });
           }
         });
       },
-      { threshold: 0.1 }
+      { threshold: 0.1, rootMargin: '0px 0px -10% 0px' }
     );
     
     const animatedElements = document.querySelectorAll('.animate-on-scroll');
     animatedElements.forEach((el) => observer.observe(el));
     
+    // Observe section refs
+    if (featuredRef.current) observer.observe(featuredRef.current);
+    if (aboutRef.current) observer.observe(aboutRef.current);
+    if (testimonialsRef.current) observer.observe(testimonialsRef.current);
+    
     return () => {
       animatedElements.forEach((el) => observer.unobserve(el));
+      if (featuredRef.current) observer.unobserve(featuredRef.current);
+      if (aboutRef.current) observer.unobserve(aboutRef.current);
+      if (testimonialsRef.current) observer.unobserve(testimonialsRef.current);
     };
   }, []);
 
@@ -41,7 +63,7 @@ const Index = () => {
       
       <div className="relative">
         {/* Featured Services Section */}
-        <section className="section-padding bg-spa-beige">
+        <section ref={featuredRef} className="section-padding bg-spa-beige transition-all duration-1000 opacity-0" style={{ transform: 'translateY(20px)' }}>
           <div className="container mx-auto">
             <div className="text-center mb-16 animate-on-scroll">
               <h2 className="text-3xl md:text-4xl font-playfair font-semibold mb-4">
@@ -55,7 +77,7 @@ const Index = () => {
             
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               {/* Signature Massage */}
-              <div className="spa-card overflow-hidden group animate-on-scroll">
+              <div className="spa-card overflow-hidden group animate-child opacity-0 transition-all duration-500 delay-100" style={{ transform: 'translateY(20px)' }}>
                 <div className="relative h-64 overflow-hidden">
                   <img 
                     src="https://images.unsplash.com/photo-1600334089648-b0d9d3028eb2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" 
@@ -80,7 +102,7 @@ const Index = () => {
               </div>
               
               {/* Gold Facial */}
-              <div className="spa-card overflow-hidden group animate-on-scroll delay-100">
+              <div className="spa-card overflow-hidden group animate-child opacity-0 transition-all duration-500 delay-200" style={{ transform: 'translateY(20px)' }}>
                 <div className="relative h-64 overflow-hidden">
                   <img 
                     src="https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" 
@@ -105,7 +127,7 @@ const Index = () => {
               </div>
               
               {/* Body Scrub */}
-              <div className="spa-card overflow-hidden group animate-on-scroll delay-200">
+              <div className="spa-card overflow-hidden group animate-child opacity-0 transition-all duration-500 delay-300" style={{ transform: 'translateY(20px)' }}>
                 <div className="relative h-64 overflow-hidden">
                   <img 
                     src="https://images.unsplash.com/photo-1515377905703-c4788e51af15?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" 
@@ -130,7 +152,7 @@ const Index = () => {
               </div>
             </div>
             
-            <div className="text-center mt-12">
+            <div className="text-center mt-12 animate-child opacity-0 transition-all duration-500 delay-400" style={{ transform: 'translateY(20px)' }}>
               <a href="/services" className="spa-button">
                 View All Services
               </a>
@@ -139,10 +161,10 @@ const Index = () => {
         </section>
         
         {/* About Overview Section */}
-        <section className="section-padding bg-white">
+        <section ref={aboutRef} className="section-padding bg-white transition-all duration-1000 opacity-0" style={{ transform: 'translateY(20px)' }}>
           <div className="container mx-auto">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-              <div className="animate-on-scroll">
+              <div className="animate-child opacity-0 transition-all duration-500 delay-100" style={{ transform: 'translateY(20px)' }}>
                 <h2 className="text-3xl md:text-4xl font-playfair font-semibold mb-6">
                   Welcome to <span className="text-spa-gold">Bloomcave</span> Spa
                 </h2>
@@ -163,40 +185,29 @@ const Index = () => {
                 </a>
               </div>
               
-              <div className="relative animate-on-scroll">
-                <div className="relative z-10 rounded-lg overflow-hidden shadow-xl">
+              <div className="relative animate-child opacity-0 transition-all duration-500 delay-200" style={{ transform: 'translateY(20px)' }}>
+                <div className="relative z-10 rounded-lg overflow-hidden shadow-xl hover:scale-[1.02] transition-transform duration-700">
                   <img
                     src="https://images.unsplash.com/photo-1544161515-4ab6ce6db874?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
                     alt="Bloomcave Spa Reception"
                     className="w-full h-auto"
                   />
                 </div>
-                <div className="absolute -bottom-8 -right-8 w-48 h-48 bg-spa-gold/20 rounded-full z-0"></div>
-                <div className="absolute -top-8 -left-8 w-32 h-32 bg-spa-sage/30 rounded-full z-0"></div>
+                <div className="absolute -bottom-8 -right-8 w-48 h-48 bg-spa-gold/20 rounded-full z-0 animate-pulse"></div>
+                <div className="absolute -top-8 -left-8 w-32 h-32 bg-spa-sage/30 rounded-full z-0 animate-pulse" style={{ animationDelay: '1s' }}></div>
               </div>
             </div>
           </div>
         </section>
         
-        {/* Testimonials Preview */}
-        <div className="bg-spa-dark/5 py-20">
-          <div className="container mx-auto">
-            <div className="text-center mb-16 animate-on-scroll">
-              <h2 className="text-3xl md:text-4xl font-playfair font-semibold mb-4">
-                What Our <span className="text-spa-gold">Clients</span> Say
-              </h2>
-              <div className="w-24 h-1 bg-spa-gold mx-auto mb-6"></div>
-            </div>
-            
-            <div className="max-w-4xl mx-auto animate-on-scroll">
-              <Testimonials />
-              
-              <div className="text-center mt-8">
-                <a href="/testimonials" className="spa-button">
-                  View More Testimonials
-                </a>
-              </div>
-            </div>
+        {/* Testimonials Section - Full Width */}
+        <div ref={testimonialsRef} className="w-full bg-spa-dark/5 py-0">
+          <Testimonials />
+          
+          <div className="text-center pb-12">
+            <a href="/testimonials" className="spa-button">
+              View More Testimonials
+            </a>
           </div>
         </div>
       </div>
@@ -206,5 +217,16 @@ const Index = () => {
     </div>
   );
 };
+
+// Add this to make sure animations work when page loads
+document.addEventListener('DOMContentLoaded', () => {
+  setTimeout(() => {
+    document.querySelectorAll('.animate-on-scroll, [style*="opacity: 0"]').forEach(el => {
+      el.classList.add('is-visible');
+      (el as HTMLElement).style.opacity = '1';
+      (el as HTMLElement).style.transform = 'translateY(0)';
+    });
+  }, 300);
+});
 
 export default Index;
