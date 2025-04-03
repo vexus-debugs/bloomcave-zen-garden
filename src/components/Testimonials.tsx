@@ -83,6 +83,19 @@ const Testimonials = () => {
       }
     };
   }, []);
+
+  // Force content visibility immediately
+  useEffect(() => {
+    const showContent = () => {
+      document.querySelectorAll('.animate-on-scroll, .animate-child').forEach(el => {
+        el.classList.add('is-visible');
+      });
+    };
+    
+    showContent();
+    // Run again after a short delay to ensure everything is visible
+    setTimeout(showContent, 100);
+  }, []);
   
   const nextSlide = () => {
     if (isAnimating) return;
@@ -110,14 +123,15 @@ const Testimonials = () => {
     <section 
       id="testimonials" 
       ref={testimonialsRef}
-      className="w-full py-20 relative overflow-hidden animate-on-scroll opacity-100"
+      className="w-full py-20 relative overflow-hidden"
     >
-      {/* Background decor */}
+      {/* Background decor - enhanced for visual appeal */}
       <div className="absolute -top-24 -left-24 w-48 h-48 bg-spa-gold/10 rounded-full blur-3xl"></div>
       <div className="absolute -bottom-24 -right-24 w-48 h-48 bg-spa-lavender/20 rounded-full blur-3xl"></div>
+      <div className="absolute top-1/2 left-1/4 w-32 h-32 bg-spa-sage/10 rounded-full blur-2xl animate-float"></div>
       
       <div className="container mx-auto">
-        <div className="text-center mb-16 animate-on-scroll is-visible">
+        <div className="text-center mb-16 animate-fade-in">
           <h2 className="text-3xl md:text-4xl font-playfair font-semibold mb-4">
             What Our <span className="text-spa-gold">Clients</span> Say
           </h2>
@@ -127,10 +141,14 @@ const Testimonials = () => {
             from people who have experienced our services.
           </p>
         </div>
-        
-        <div ref={sliderRef} className="w-full relative px-4">
-          {/* Testimonial Slider - Full Width */}
-          <div className="overflow-hidden relative w-full bg-gradient-to-r from-spa-beige/30 via-white to-spa-beige/30 py-12">
+      </div>
+      
+      {/* Full-width testimonial slider with enhanced animations */}
+      <div className="w-full bg-spa-beige/30 py-12 animate-slide-in">
+        <div ref={sliderRef} className="container mx-auto relative">
+          <div 
+            className="overflow-hidden relative w-full"
+          >
             <div 
               className="transition-all duration-500 ease-in-out flex w-full"
               style={{ transform: `translateX(-${currentSlide * 100}%)` }}
@@ -138,14 +156,14 @@ const Testimonials = () => {
               {testimonials.map((testimonial) => (
                 <div 
                   key={testimonial.id} 
-                  className="w-full flex-shrink-0 px-4 md:px-12"
+                  className="w-full flex-shrink-0 px-4"
                 >
-                  <div className="flex flex-col md:flex-row items-center md:items-start max-w-4xl mx-auto">
+                  <div className="flex flex-col md:flex-row items-center max-w-6xl mx-auto bg-white/50 backdrop-blur-sm rounded-xl p-6 md:p-10 shadow-lg hover:shadow-xl transition-all duration-300">
                     <div className="md:w-1/4 flex flex-col items-center md:mr-8 mb-6 md:mb-0">
                       <img 
                         src={testimonial.avatar} 
                         alt={testimonial.name}
-                        className="w-20 h-20 object-cover rounded-full border-2 border-spa-gold mb-4 hover:scale-105 transition-transform duration-300"
+                        className="w-24 h-24 object-cover rounded-full border-2 border-spa-gold mb-4 hover:scale-105 transition-transform duration-300 shadow-md"
                       />
                       
                       <div className="flex items-center mb-2">
@@ -176,33 +194,33 @@ const Testimonials = () => {
               ))}
             </div>
             
-            {/* Navigation Arrows - Repositioned for full width */}
+            {/* Navigation Arrows - Enhanced with better positioning and styling */}
             <button 
               onClick={prevSlide}
-              className="absolute top-1/2 -translate-y-1/2 left-4 w-10 h-10 rounded-full bg-white/80 shadow-md flex items-center justify-center hover:bg-spa-gold hover:text-white transition-all duration-300 z-10"
+              className="absolute top-1/2 -translate-y-1/2 left-4 md:left-2 w-12 h-12 rounded-full bg-white/80 shadow-lg flex items-center justify-center hover:bg-spa-gold hover:text-white transition-all duration-300 z-10"
               aria-label="Previous testimonial"
             >
-              <ChevronLeft size={20} />
+              <ChevronLeft size={24} />
             </button>
             
             <button 
               onClick={nextSlide}
-              className="absolute top-1/2 -translate-y-1/2 right-4 w-10 h-10 rounded-full bg-white/80 shadow-md flex items-center justify-center hover:bg-spa-gold hover:text-white transition-all duration-300 z-10"
+              className="absolute top-1/2 -translate-y-1/2 right-4 md:right-2 w-12 h-12 rounded-full bg-white/80 shadow-lg flex items-center justify-center hover:bg-spa-gold hover:text-white transition-all duration-300 z-10"
               aria-label="Next testimonial"
             >
-              <ChevronRight size={20} />
+              <ChevronRight size={24} />
             </button>
           </div>
           
-          {/* Pagination Dots */}
+          {/* Pagination Dots - Enhanced with animation */}
           <div className="flex justify-center mt-8 space-x-2">
             {testimonials.map((_, index) => (
               <button
                 key={index}
                 onClick={() => setCurrentSlide(index)}
                 className={cn(
-                  "w-3 h-3 rounded-full transition-all duration-300",
-                  index === currentSlide ? "bg-spa-gold w-6" : "bg-spa-gold/30"
+                  "w-3 h-3 rounded-full transition-all duration-300 hover:scale-125",
+                  index === currentSlide ? "bg-spa-gold w-8" : "bg-spa-gold/30"
                 )}
                 aria-label={`Go to slide ${index + 1}`}
               />

@@ -4,6 +4,9 @@ import Navigation from '@/components/Navigation';
 import Hero from '@/components/Hero';
 import Services from '@/components/Services';
 import Testimonials from '@/components/Testimonials';
+import ServicesCarousel from '@/components/ServicesCarousel';
+import WellnessGallery from '@/components/WellnessGallery';
+import PromoSection from '@/components/PromoSection';
 import Footer from '@/components/Footer';
 import ScrollToTop from '@/components/ScrollToTop';
 
@@ -11,7 +14,6 @@ const Index = () => {
   // Refs for animation targets
   const featuredRef = useRef<HTMLDivElement>(null);
   const aboutRef = useRef<HTMLDivElement>(null);
-  const testimonialsRef = useRef<HTMLDivElement>(null);
   
   useEffect(() => {
     // Initialize scroll animations
@@ -49,7 +51,6 @@ const Index = () => {
     // Observe section refs
     if (featuredRef.current) observer.observe(featuredRef.current);
     if (aboutRef.current) observer.observe(aboutRef.current);
-    if (testimonialsRef.current) observer.observe(testimonialsRef.current);
     
     return () => {
       document.querySelectorAll('.animate-on-scroll').forEach((el) => {
@@ -57,7 +58,6 @@ const Index = () => {
       });
       if (featuredRef.current) observer.unobserve(featuredRef.current);
       if (aboutRef.current) observer.unobserve(aboutRef.current);
-      if (testimonialsRef.current) observer.unobserve(testimonialsRef.current);
     };
   }, []);
 
@@ -180,6 +180,9 @@ const Index = () => {
           </div>
         </section>
         
+        {/* Service Carousel Section */}
+        <ServicesCarousel />
+        
         {/* About Overview Section */}
         <section ref={aboutRef} className="section-padding bg-white opacity-100">
           <div className="container mx-auto">
@@ -220,16 +223,14 @@ const Index = () => {
           </div>
         </section>
         
+        {/* Wellness Gallery */}
+        <WellnessGallery />
+        
+        {/* Promotion Section */}
+        <PromoSection />
+        
         {/* Testimonials Section - Full Width */}
-        <div ref={testimonialsRef} className="w-full bg-spa-dark/5 py-0">
-          <Testimonials />
-          
-          <div className="text-center pb-12">
-            <a href="/testimonials" className="spa-button">
-              View More Testimonials
-            </a>
-          </div>
-        </div>
+        <Testimonials />
       </div>
       
       <Footer />
