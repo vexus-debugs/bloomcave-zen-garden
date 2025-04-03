@@ -1,4 +1,3 @@
-
 import React, { useEffect, useRef } from 'react';
 import Navigation from '@/components/Navigation';
 import Hero from '@/components/Hero';
@@ -100,7 +99,7 @@ const Index = () => {
               <div className="spa-card overflow-hidden group animate-child is-visible">
                 <div className="relative h-64 overflow-hidden">
                   <img 
-                    src="https://images.unsplash.com/photo-1600334089648-b0d9d3028eb2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" 
+                    src="https://images.unsplash.com/photo-1600334089648-b0d9d3028eb2?ixlib=rb-4.0.3&q=80" 
                     alt="Bloomcave Signature Massage"
                     className="w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-110"
                   />
@@ -125,7 +124,7 @@ const Index = () => {
               <div className="spa-card overflow-hidden group animate-child is-visible">
                 <div className="relative h-64 overflow-hidden">
                   <img 
-                    src="https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" 
+                    src="https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?ixlib=rb-4.0.3&q=80" 
                     alt="24K Gold Facial"
                     className="w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-110"
                   />
@@ -150,7 +149,7 @@ const Index = () => {
               <div className="spa-card overflow-hidden group animate-child is-visible">
                 <div className="relative h-64 overflow-hidden">
                   <img 
-                    src="https://images.unsplash.com/photo-1515377905703-c4788e51af15?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" 
+                    src="https://images.unsplash.com/photo-1515377905703-c4788e51af15?ixlib=rb-4.0.3&q=80" 
                     alt="Exfoliating Body Scrub"
                     className="w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-110"
                   />
@@ -211,7 +210,7 @@ const Index = () => {
               <div className="relative animate-child is-visible">
                 <div className="relative z-10 rounded-lg overflow-hidden shadow-xl hover:scale-[1.02] transition-transform duration-700">
                   <img
-                    src="https://images.unsplash.com/photo-1544161515-4ab6ce6db874?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
+                    src="https://images.unsplash.com/photo-1544161515-4ab6ce6db874?ixlib=rb-4.0.3&q=80"
                     alt="Bloomcave Spa Reception"
                     className="w-full h-auto"
                   />

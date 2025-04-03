@@ -1,4 +1,3 @@
-
 import React, { useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
@@ -26,7 +25,7 @@ const carouselServices: CarouselService[] = [
     id: 1,
     title: "Aromatherapy Massage",
     description: "Relax and rejuvenate with our signature aromatherapy massage using premium essential oils.",
-    image: "https://images.unsplash.com/photo-1519823551278-6eaa7e12e597?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80",
+    image: "https://images.unsplash.com/photo-1519823551278-6eaa7e12e597?ixlib=rb-4.0.3&q=80",
     price: "₦15,000",
     duration: "60 min",
     popular: true
@@ -35,7 +34,7 @@ const carouselServices: CarouselService[] = [
     id: 2,
     title: "Deep Tissue Massage",
     description: "Release tension and chronic pain with our therapeutic deep tissue massage technique.",
-    image: "https://images.unsplash.com/photo-1544161515-4ab6ce6db874?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
+    image: "https://images.unsplash.com/photo-1544161515-4ab6ce6db874?ixlib=rb-4.0.3&q=80",
     price: "₦18,000",
     duration: "75 min"
   },
@@ -43,7 +42,7 @@ const carouselServices: CarouselService[] = [
     id: 3,
     title: "Facial Treatment",
     description: "Revitalize your skin with our premium facial using organic Nigerian ingredients.",
-    image: "https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
+    image: "https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?ixlib=rb-4.0.3&q=80",
     price: "₦20,000",
     duration: "60 min",
     popular: true
@@ -52,7 +51,7 @@ const carouselServices: CarouselService[] = [
     id: 4,
     title: "Hot Stone Therapy",
     description: "Experience the healing power of warm basalt stones combined with massage therapy.",
-    image: "https://images.unsplash.com/photo-1600334129128-685c5582fd35?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
+    image: "https://images.unsplash.com/photo-1600334129128-685c5582fd35?ixlib=rb-4.0.3&q=80",
     price: "₦22,000",
     duration: "90 min"
   },
@@ -60,7 +59,7 @@ const carouselServices: CarouselService[] = [
     id: 5,
     title: "Body Scrub & Wrap",
     description: "Exfoliate and nourish your skin with our luxurious body scrub and moisturizing wrap.",
-    image: "https://images.unsplash.com/photo-1515377905703-c4788e51af15?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
+    image: "https://images.unsplash.com/photo-1515377905703-c4788e51af15?ixlib=rb-4.0.3&q=80",
     price: "₦25,000",
     duration: "120 min"
   },
@@ -68,7 +67,7 @@ const carouselServices: CarouselService[] = [
     id: 6,
     title: "Couples Massage",
     description: "Share a relaxing experience with a loved one in our special couples massage room.",
-    image: "https://images.unsplash.com/photo-1540555700478-4be289fbecef?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
+    image: "https://images.unsplash.com/photo-1540555700478-4be289fbecef?ixlib=rb-4.0.3&q=80",
     price: "₦30,000",
     duration: "75 min",
     popular: true

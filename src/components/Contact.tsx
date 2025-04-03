@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { MapPin, Phone, Mail, Clock, Instagram, Facebook, Twitter, Send } from 'lucide-react';
 
@@ -8,7 +7,7 @@ const Contact = () => {
       {/* Hero Section */}
       <section className="relative h-[40vh] md:h-[50vh] flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-          style={{ backgroundImage: `url('https://images.unsplash.com/photo-1596178060671-7a58b126afb7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1978&q=80')` }}>
+          style={{ backgroundImage: `url('https://images.unsplash.com/photo-1596178060671-7a58b126afb7?ixlib=rb-4.0.3&q=80')` }}>
           <div className="absolute inset-0 bg-gradient-to-b from-spa-dark/80 to-spa-dark/50"></div>
         </div>
         
@@ -193,7 +192,7 @@ const Contact = () => {
         </div>
         
         {/* Map placeholder - would be replaced by a real Google Maps embed */}
-        <div className="h-full w-full bg-cover bg-center" style={{ backgroundImage: 'url("https://api.mapbox.com/styles/v1/mapbox/streets-v11/static/3.32,6.38,13,0/1200x600?access_token=pk.eyJ1IjoiZXhhbXBsZXVzZXIiLCJhIjoiY2s4YnE4NHZqMDBsZjNkcDJkMDc2d2tmNiJ9.gCx2gkujuHyItZ4nZ5rPLQ")' }}></div>
+        <div className="h-full w-full bg-cover bg-center" style={{ backgroundImage: 'url("https://maps.googleapis.com/maps/api/staticmap?center=Benin+City,Nigeria&zoom=13&size=1200x600&key=AIzaSyBDaeWicvigtP9xPv919E-RNoxfvC-Hqik")' }}></div>
       </section>
       
       {/* Newsletter Section */}

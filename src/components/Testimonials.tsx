@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect, useRef } from 'react';
 import { ChevronLeft, ChevronRight, Star } from 'lucide-react';
 import { cn } from '@/lib/utils';
@@ -18,7 +17,7 @@ const testimonials: Testimonial[] = [
     name: "Amara Okafor",
     role: "Regular Client",
     comment: "I've been to many spas across Nigeria, but Bloomcave truly stands out. The aromatherapy massage was divine, and the staff went above and beyond to ensure I was comfortable throughout my visit.",
-    avatar: "https://images.unsplash.com/photo-1567532939604-b6b5b0db2604?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80",
+    avatar: "https://images.unsplash.com/photo-1567532939604-b6b5b0db2604?ixlib=rb-4.0.3&q=80",
     rating: 5
   },
   {
@@ -26,7 +25,7 @@ const testimonials: Testimonial[] = [
     name: "Emmanuel Adeyemi",
     role: "First-time Visitor",
     comment: "My wife surprised me with a couples massage at Bloomcave, and it was an exceptional experience. The ambiance, the skill of the therapists, and the attention to detail were all impressive.",
-    avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80",
+    avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&q=80",
     rating: 5
   },
   {
@@ -34,7 +33,7 @@ const testimonials: Testimonial[] = [
     name: "Chioma Nwosu",
     role: "Monthly Member",
     comment: "As someone who regularly deals with stress, my monthly sessions at Bloomcave have become essential to my wellbeing. Their deep tissue massage has significantly improved my chronic back pain.",
-    avatar: "https://images.unsplash.com/photo-1489424731084-a5d8b219a5bb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80",
+    avatar: "https://images.unsplash.com/photo-1489424731084-a5d8b219a5bb?ixlib=rb-4.0.3&q=80",
     rating: 4
   },
   {
@@ -42,7 +41,7 @@ const testimonials: Testimonial[] = [
     name: "Oluwaseun Adeleke",
     role: "Business Traveler",
     comment: "Whenever I'm in Benin for business, I make sure to book a session at Bloomcave. Their facial treatments are outstanding, using natural ingredients that leave my skin glowing for days.",
-    avatar: "https://images.unsplash.com/photo-1463453091185-61582044d556?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1770&q=80",
+    avatar: "https://images.unsplash.com/photo-1463453091185-61582044d556?ixlib=rb-4.0.3&q=80",
     rating: 5
   },
 ];
@@ -84,7 +83,6 @@ const Testimonials = () => {
     };
   }, []);
 
-  // Force content visibility immediately
   useEffect(() => {
     const showContent = () => {
       document.querySelectorAll('.animate-on-scroll, .animate-child').forEach(el => {
@@ -93,7 +91,6 @@ const Testimonials = () => {
     };
     
     showContent();
-    // Run again after a short delay to ensure everything is visible
     setTimeout(showContent, 100);
   }, []);
   
@@ -125,7 +122,6 @@ const Testimonials = () => {
       ref={testimonialsRef}
       className="w-full py-20 relative overflow-hidden"
     >
-      {/* Background decor - enhanced for visual appeal */}
       <div className="absolute -top-24 -left-24 w-48 h-48 bg-spa-gold/10 rounded-full blur-3xl"></div>
       <div className="absolute -bottom-24 -right-24 w-48 h-48 bg-spa-lavender/20 rounded-full blur-3xl"></div>
       <div className="absolute top-1/2 left-1/4 w-32 h-32 bg-spa-sage/10 rounded-full blur-2xl animate-float"></div>
@@ -143,7 +139,6 @@ const Testimonials = () => {
         </div>
       </div>
       
-      {/* Full-width testimonial slider with enhanced animations */}
       <div className="w-full bg-spa-beige/30 py-12 animate-slide-in">
         <div ref={sliderRef} className="container mx-auto relative">
           <div 
@@ -194,7 +189,6 @@ const Testimonials = () => {
               ))}
             </div>
             
-            {/* Navigation Arrows - Enhanced with better positioning and styling */}
             <button 
               onClick={prevSlide}
               className="absolute top-1/2 -translate-y-1/2 left-4 md:left-2 w-12 h-12 rounded-full bg-white/80 shadow-lg flex items-center justify-center hover:bg-spa-gold hover:text-white transition-all duration-300 z-10"
@@ -212,7 +206,6 @@ const Testimonials = () => {
             </button>
           </div>
           
-          {/* Pagination Dots - Enhanced with animation */}
           <div className="flex justify-center mt-8 space-x-2">
             {testimonials.map((_, index) => (
               <button

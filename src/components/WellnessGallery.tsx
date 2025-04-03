@@ -1,4 +1,3 @@
-
 import React, { useRef, useEffect } from 'react';
 import { ArrowRight } from 'lucide-react';
 import { cn } from '@/lib/utils';
@@ -16,39 +15,39 @@ const galleryItems: GalleryItem[] = [
     id: 1,
     title: "Tranquil Spaces",
     category: "Ambiance",
-    image: "https://images.unsplash.com/photo-1600334129128-685c5582fd35?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80",
+    image: "https://images.unsplash.com/photo-1600334129128-685c5582fd35?ixlib=rb-4.0.3&q=80",
     largeSpan: true
   },
   {
     id: 2,
     title: "Premium Products",
     category: "Skincare",
-    image: "https://images.unsplash.com/photo-1608248597279-f99d160bfcbc?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80"
+    image: "https://images.unsplash.com/photo-1608248597279-f99d160bfcbc?ixlib=rb-4.0.3&q=80"
   },
   {
     id: 3,
     title: "Expert Therapists",
     category: "Team",
-    image: "https://images.unsplash.com/photo-1516401266446-6432a8a07d41?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
+    image: "https://images.unsplash.com/photo-1516401266446-6432a8a07d41?ixlib=rb-4.0.3&q=80"
   },
   {
     id: 4,
     title: "Relaxation Pools",
     category: "Facilities",
-    image: "https://images.unsplash.com/photo-1610708275938-e6dfa4c890db?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2071&q=80",
+    image: "https://images.unsplash.com/photo-1610708275938-e6dfa4c890db?ixlib=rb-4.0.3&q=80",
     largeSpan: true
   },
   {
     id: 5,
     title: "Aromatherapy",
     category: "Treatments",
-    image: "https://images.unsplash.com/photo-1636377435946-b5d838bf6229?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
+    image: "https://images.unsplash.com/photo-1636377435946-b5d838bf6229?ixlib=rb-4.0.3&q=80"
   },
   {
     id: 6,
     title: "Refreshments",
     category: "Services",
-    image: "https://images.unsplash.com/photo-1541658016709-82535e94bc69?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1169&q=80"
+    image: "https://images.unsplash.com/photo-1541658016709-82535e94bc69?ixlib=rb-4.0.3&q=80"
   }
 ];
 
