@@ -5,10 +5,18 @@ import { ArrowDown } from 'lucide-react';
 
 const Hero = () => {
   const [loaded, setLoaded] = useState(false);
+  const [currentImage, setCurrentImage] = useState(0);
   const navigate = useNavigate();
 
   useEffect(() => {
     setLoaded(true);
+    
+    // Set up image rotation
+    const interval = setInterval(() => {
+      setCurrentImage((prev) => (prev + 1) % heroImages.length);
+    }, 5000);
+    
+    return () => clearInterval(interval);
   }, []);
 
   const scrollToBottom = () => {
@@ -26,16 +34,34 @@ const Hero = () => {
 
   return (
     <section className="relative h-screen w-full overflow-hidden">
-      {/* Background Image */}
-      <div 
-        className="absolute inset-0 bg-cover bg-center bg-no-repeat transition-opacity duration-1000"
-        style={{ 
-          backgroundImage: `url('${heroImages[0]}')`,
-          opacity: loaded ? 1 : 0
-        }}
-      >
-        {/* Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-b from-spa-dark/70 to-spa-dark/40"></div>
+      {/* Background Images */}
+      {heroImages.map((image, index) => (
+        <div 
+          key={index}
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat transition-opacity duration-1000"
+          style={{ 
+            backgroundImage: `url('${image}')`,
+            opacity: loaded && currentImage === index ? 1 : 0,
+            zIndex: 0
+          }}
+        >
+          {/* Overlay */}
+          <div className="absolute inset-0 bg-gradient-to-b from-spa-dark/70 to-spa-dark/40"></div>
+        </div>
+      ))}
+
+      {/* Image Navigation Indicators */}
+      <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex space-x-2 z-20">
+        {heroImages.map((_, index) => (
+          <button
+            key={index}
+            className={`w-2 h-2 rounded-full transition-all duration-300 ${
+              currentImage === index ? "w-8 bg-spa-gold" : "bg-white/50"
+            }`}
+            onClick={() => setCurrentImage(index)}
+            aria-label={`Go to slide ${index + 1}`}
+          />
+        ))}
       </div>
 
       {/* Content */}
@@ -69,6 +95,7 @@ const Hero = () => {
           <button onClick={scrollToBottom} className="text-white/80 hover:text-white transition-colors">
             <div className="scroll-indicator">
               <span className="sr-only">Scroll down</span>
+              <ArrowDown className="animate-bounce mt-2" size={18} />
             </div>
           </button>
         </div>
